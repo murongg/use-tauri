@@ -1,0 +1,53 @@
+{
+  "name": "use-tauri",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "description": "",
+  "author": "MuRong <hi@mrong.me>",
+  "license": "MIT",
+  "funding": "https://github.com/sponsors/murongg",
+  "homepage": "https://github.com/murongg/use-tauri#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/murongg/use-tauri.git"
+  },
+  "bugs": {
+    "url": "https://github.com/murongg/use-tauri/issues"
+  },
+  "keywords": [],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    },
+    "./core": {
+      "types": "./dist/core.d.ts",
+      "require": "./dist/core.cjs",
+      "import": "./dist/core.mjs"
+    },
+    "./vue": {
+      "types": "./dist/vue.d.ts",
+      "require": "./dist/vue.cjs",
+      "import": "./dist/vue.mjs"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "require": "./dist/react.cjs",
+      "import": "./dist/react.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@use-tauri/core": "workspace:*",
+    "@use-tauri/react": "workspace:*",
+    "@use-tauri/vue": "workspace:*"
+  }
+}

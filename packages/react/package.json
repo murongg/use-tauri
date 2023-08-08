@@ -1,0 +1,41 @@
+{
+  "name": "@use-tauri/react",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "description": "",
+  "author": "MuRong <hi@mrong.me>",
+  "license": "MIT",
+  "funding": "https://github.com/sponsors/murongg",
+  "homepage": "https://github.com/murongg/use-tauri#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/murongg/use-tauri.git"
+  },
+  "bugs": {
+    "url": "https://github.com/murongg/use-tauri/issues"
+  },
+  "keywords": [],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ]
+}
