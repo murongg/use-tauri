@@ -1,5 +1,5 @@
 {
-  "name": "@use-tauri/react",
+  "name": "@use-tauri/shared",
   "type": "module",
   "version": "0.0.1",
   "private": true,
@@ -39,11 +39,9 @@
     "dist"
   ],
   "peerDependencies": {
-    "@tauri-apps/api": ">=1.4.0",
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+    "@tauri-apps/api": ">=1.4.0"
   },
   "dependencies": {
-    "@use-tauri/core": "workspace:*",
-    "@use-tauri/shared": "workspace:*"
+    "@use-tauri/core": "workspace:*"
   }
 }

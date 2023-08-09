@@ -9,7 +9,7 @@ import json from '@rollup/plugin-json'
 import type { RollupOptions } from 'rollup'
 import { defineConfig } from 'rollup'
 
-const packages = ['core', 'react', 'vue', 'use-tauri']
+const packages = ['core', 'shared', 'react', 'vue', 'use-tauri']
 const inputs = packages.map(pkg => ({
   input: `packages/${pkg}/index.ts`,
   pkg,
@@ -17,6 +17,28 @@ const inputs = packages.map(pkg => ({
 
 const external = [
   ...builtinModules,
+  'vue',
+  'react',
+  '@use-tauri/shared',
+  '@use-tauri/core',
+  '@tauri-apps/api',
+  '@tauri-apps/api/window',
+  '@tauri-apps/api/event',
+  '@tauri-apps/api/app',
+  '@tauri-apps/api/cli',
+  '@tauri-apps/api/clipboard',
+  '@tauri-apps/api/dialog',
+  '@tauri-apps/api/fs',
+  '@tauri-apps/api/globalShortcut',
+  '@tauri-apps/api/http',
+  '@tauri-apps/api/mocks',
+  '@tauri-apps/api/notification',
+  '@tauri-apps/api/os',
+  '@tauri-apps/api/path',
+  '@tauri-apps/api/process',
+  '@tauri-apps/api/shell',
+  '@tauri-apps/api/tauri',
+  '@tauri-apps/api/updater',
 ]
 
 const plugins = [
@@ -82,6 +104,10 @@ for (const item of inputs) {
     },
     external,
     plugins: [
+      nodeResolve({
+        preferBuiltins: true,
+      }),
+      commonjs(),
       rollupDts({ respectExternal: true }),
     ],
   }

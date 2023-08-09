@@ -50,6 +50,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@types/react": "^18.2.19",
     "esbuild-register": "^3.4.2"
   },
   "devDependencies": {
@@ -59,12 +60,15 @@
     "@rollup/plugin-commonjs": "^25.0.3",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.1.0",
+    "@tauri-apps/api": "^1.4.0",
     "@types/node": "^18.16.16",
+    "@vue/composition-api": "^1.7.1",
     "bumpp": "^9.1.0",
     "eslint": "^8.41.0",
     "esno": "^0.16.3",
     "lint-staged": "^13.2.2",
     "pnpm": "^8.6.0",
+    "react": "^18.2.0",
     "rimraf": "^5.0.1",
     "rollup": "^3.27.2",
     "rollup-plugin-dts": "^5.3.1",
@@ -72,7 +76,8 @@
     "simple-git-hooks": "^2.8.1",
     "typescript": "^5.0.4",
     "vite": "^4.3.9",
-    "vitest": "^0.31.3"
+    "vitest": "^0.31.3",
+    "vue": "^3.3.4"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

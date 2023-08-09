@@ -1,1 +1,1 @@
-export const pkg = 'react'
+export * from './hooks'

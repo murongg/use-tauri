@@ -1,1 +1,1 @@
-export const pkg = 'core'
+export { UseTauriWindowManager } from './src/windowManager'

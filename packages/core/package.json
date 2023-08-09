@@ -37,5 +37,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "peerDependencies": {
+    "@tauri-apps/api": ">=1.4.0"
+  }
 }

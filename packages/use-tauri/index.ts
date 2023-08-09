@@ -1,3 +1,3 @@
-export { pkg as corePkg } from '@use-tauri/core'
-export { pkg as reactPkg } from '@use-tauri/react'
-export { pkg as vuePkg } from '@use-tauri/vue'
+export * from '@use-tauri/core'
+export { useWindow as useWindowReact } from '@use-tauri/react'
+export { useWindow as useWindowVue } from '@use-tauri/vue'

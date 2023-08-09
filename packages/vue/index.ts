@@ -1,1 +1,1 @@
-export const pkg = 'vue'
+export { useWindow } from './composables/useWindow'

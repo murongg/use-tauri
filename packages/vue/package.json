@@ -37,5 +37,21 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "peerDependencies": {
+    "@tauri-apps/api": ">=1.4.0",
+    "@vue/composition-api": "^1.0.0-rc.1",
+    "vue": "^2.0.0 || >=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@use-tauri/core": "workspace:*",
+    "@use-tauri/shared": "workspace:*",
+    "@vueuse/core": "^10.3.0",
+    "vue-demi": "^0.14.5"
+  }
 }
