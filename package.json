@@ -39,12 +39,12 @@
     "dist"
   ],
   "scripts": {
-    "build": "rollup -c",
+    "build": "rm -rf packages/**/dist && rollup -c",
     "dev": "unbuild --stub",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepublishOnly": "nr build",
-    "publish": "esno scripts/publish.ts",
+    "publish": "esno scripts/build.ts && esno scripts/publish.ts",
     "release": "bumpp --all && npm run publish",
     "start": "esno src/index.ts",
     "test": "vitest",
