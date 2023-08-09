@@ -1,6 +1,6 @@
 {
   "name": "@use-tauri/monorepo",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "packageManager": "pnpm@8.6.0",
   "description": "",
@@ -39,13 +39,13 @@
     "dist"
   ],
   "scripts": {
-    "build": "rollup -c",
+    "build": "rm -rf packages/**/dist && rollup -c",
     "dev": "unbuild --stub",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepublishOnly": "nr build",
-    "publish": "esno scripts/publish.ts",
-    "release": "bumpp --all && npm run publish",
+    "prepublishOnly": "nr build && esno scripts/build.ts",
+    "publish": "npm run prepublishOnly && esno scripts/publish.ts",
+    "release": "esno scripts/release.ts && npm run publish",
     "start": "esno src/index.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit"
