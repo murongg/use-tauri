@@ -8,8 +8,8 @@ import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 import type { RollupOptions } from 'rollup'
 import { defineConfig } from 'rollup'
+import { packages } from './constants'
 
-const packages = ['core', 'shared', 'react', 'vue', 'use-tauri']
 const inputs = packages.map(pkg => ({
   input: `packages/${pkg}/index.ts`,
   pkg,

@@ -44,13 +44,15 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prepublishOnly": "nr build",
-    "release": "bumpp && npm publish",
+    "publish": "esno scripts/publish.ts",
+    "release": "bumpp --all && npm run publish",
     "start": "esno src/index.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@types/react": "^18.2.19",
+    "consola": "^3.2.3",
     "esbuild-register": "^3.4.2"
   },
   "devDependencies": {
@@ -61,11 +63,13 @@
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "@tauri-apps/api": "^1.4.0",
+    "@types/fs-extra": "^11.0.1",
     "@types/node": "^18.16.16",
     "@vue/composition-api": "^1.7.1",
     "bumpp": "^9.1.0",
     "eslint": "^8.41.0",
     "esno": "^0.16.3",
+    "fs-extra": "^11.1.1",
     "lint-staged": "^13.2.2",
     "pnpm": "^8.6.0",
     "react": "^18.2.0",
