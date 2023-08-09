@@ -69,6 +69,8 @@ const configs: RollupOptions[] = []
 for (const item of inputs) {
   const input = item.input
   const outputDir = `packages/${item.pkg}/dist`
+  const isIgnoreExternal = input.includes('packages/use-tauri/index') || input.includes('packages/use-tauri/src/core') || input.includes('packages/use-tauri/src/shared')
+  const tmpExternal = isIgnoreExternal ? external.filter(item => item !== '@use-tauri/shared' && item !== '@use-tauri/core') : external
   const esm: RollupOptions = {
     input,
     output: {
@@ -76,7 +78,7 @@ for (const item of inputs) {
       format: 'esm',
       entryFileNames: '[name].mjs',
     },
-    external,
+    external: tmpExternal,
     plugins: [
       ...plugins,
     ],
@@ -89,7 +91,7 @@ for (const item of inputs) {
       format: 'cjs',
       entryFileNames: '[name].cjs',
     },
-    external,
+    external: tmpExternal,
     plugins: [
       ...plugins,
     ],
@@ -102,7 +104,7 @@ for (const item of inputs) {
       entryFileNames: '[name].d.ts',
       format: 'esm',
     },
-    external,
+    external: tmpExternal,
     plugins: [
       nodeResolve({
         preferBuiltins: true,

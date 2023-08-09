@@ -135,6 +135,9 @@ importers:
       '@use-tauri/react':
         specifier: workspace:*
         version: link:../react
+      '@use-tauri/shared':
+        specifier: workspace:*
+        version: link:../shared
       '@use-tauri/vue':
         specifier: workspace:*
         version: link:../vue

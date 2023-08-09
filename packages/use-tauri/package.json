@@ -36,6 +36,11 @@
       "types": "./dist/react.d.ts",
       "require": "./dist/react.cjs",
       "import": "./dist/react.mjs"
+    },
+    "./shared": {
+      "types": "./dist/shared.d.ts",
+      "require": "./dist/shared.cjs",
+      "import": "./dist/shared.mjs"
     }
   },
   "main": "./dist/index.mjs",
@@ -47,6 +52,7 @@
   "dependencies": {
     "@use-tauri/core": "workspace:*",
     "@use-tauri/react": "workspace:*",
+    "@use-tauri/shared": "workspace:*",
     "@use-tauri/vue": "workspace:*"
   }
 }
