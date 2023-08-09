@@ -45,7 +45,7 @@
     "lint:fix": "eslint . --fix",
     "prepublishOnly": "nr build && esno scripts/build.ts",
     "publish": "npm run prepublishOnly && esno scripts/publish.ts",
-    "release": "esno scripts/release.ts && npm run publish",
+    "release": "esno scripts/release.ts",
     "start": "esno src/index.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit"
