@@ -2,7 +2,6 @@
   "name": "@use-tauri/vue",
   "type": "module",
   "version": "0.0.1",
-  "private": true,
   "description": "",
   "author": "MuRong <hi@mrong.me>",
   "license": "MIT",

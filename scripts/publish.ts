@@ -12,6 +12,6 @@ if (version.includes('beta'))
   command += ' --tag beta'
 
 for (const name of packages) {
-  execSync(command, { stdio: 'inherit', cwd: path.join('packages', name, 'dist') })
+  execSync(command, { stdio: 'inherit', cwd: path.join('packages', name) })
   consola.success(`Published @use-tauri/${name}`)
 }
