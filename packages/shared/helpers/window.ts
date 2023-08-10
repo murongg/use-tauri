@@ -5,6 +5,9 @@ import type { UseWindowListenOptions } from '../types'
 export function getWindowManagerAndOptions(...args: any[]) {
   let windowManager: WindowManager
   let options: UseWindowListenOptions
+  if (!args[0])
+    throw new Error('[UseTauri] windowManager label or instance is required.')
+
   if (args[0] instanceof WindowManager) {
     windowManager = args[0]
     options = args[1]
