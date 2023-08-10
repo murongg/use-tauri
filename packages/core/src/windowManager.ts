@@ -1,5 +1,6 @@
 import type { EventCallback, EventName, UnlistenFn } from '@tauri-apps/api/event'
 import type { WindowManager } from '@tauri-apps/api/window'
+import type { EventCallbackNone, FilePath, OnMovePayload, OnResizePayload, OnScaleChangePayload, OnWindowCreatedPayload, WindowTheme } from './types'
 
 const managers: Map<string, WindowManager> = new Map()
 
@@ -31,51 +32,107 @@ export class UseTauriWindowManager {
   }
 
   /**
-   * listen to window manager move event.
+   * listen to window manager move event, callback window position.
    * @param cb
    */
-  onMove(cb: EventCallback<{ x: number; y: number }>) {
+  onMove(cb: EventCallback<OnMovePayload>) {
     this.listen('tauri://move', cb)
   }
 
   /**
-   * listen to window manager resize event.
+   * listen to window manager resize event, callback window size.
    * @param cb
    */
-  onResize(cb: EventCallback<{ width: number; height: number }>) {
+  onResize(cb: EventCallback<OnResizePayload>) {
     this.listen('tauri://resize', cb)
   }
 
   /**
-   * listen to window manager focus event.
+   * listen to window manager focus event, none callback.
    * @param cb
    */
-  onBlur(cb: EventCallback<null>) {
+  onBlur(cb: EventCallback<EventCallbackNone>) {
     this.listen('tauri://blur', cb)
   }
 
   /**
-   * listen to window manager blur event.
+   * listen to window manager blur event, none callback.
    * @param cb
    */
-  onFocus(cb: EventCallback<null>) {
+  onFocus(cb: EventCallback<EventCallbackNone>) {
     this.listen('tauri://focus', cb)
   }
 
   /**
-   * listen to window manager close event.
+   * listen to window manager close event, none callback.
    * @param cb
    */
-  onCloseRequested(cb: EventCallback<null>) {
+  onCloseRequested(cb: EventCallback<EventCallbackNone>) {
     this.listen('tauri://close-requested', cb)
   }
 
   /**
-   * listen to window manager created event.
+   * listen to window manager created event, none callback.
    * @param cb
    */
-  onWindowCreated(cb: EventCallback<null>) {
+  onWindowCreated(cb: EventCallback<OnWindowCreatedPayload>) {
     this.listen('tauri://window-created', cb)
+  }
+
+  /**
+   * listen to window manager destroyed event, none callback.
+   * @param cb
+   */
+  onDestroyed(cb: EventCallback<EventCallbackNone>) {
+    this.listen('tauri://destroyed', cb)
+  }
+
+  /**
+   * listen to window manager file drop event, callback file paths.
+   * @param cb
+   */
+  onFileDrop(cb: EventCallback<FilePath[]>) {
+    this.listen('tauri://file-drop', cb)
+  }
+
+  /**
+   * listen to window manager file drop hover event, callback file paths.
+   * @param cb
+   */
+  onFileDropHover(cb: EventCallback<FilePath[]>) {
+    this.listen('tauri://file-drop-hover', cb)
+  }
+
+  /**
+   * listen to window manager file drop cancelled event, none callback.
+   * @param cb
+   */
+  onFileDropCancelled(cb: EventCallback<EventCallbackNone>) {
+    this.listen('tauri://file-drop-cancelled', cb)
+  }
+
+  /**
+   * listen to window theme changed event, callback theme.
+   * @param cb
+   */
+  onThemeChanged(cb: EventCallback<WindowTheme>) {
+    this.listen('tauri://theme-changed', cb)
+  }
+
+  /**
+   * listen to window manager scale changed event, callback scale factor and window size.
+   * @param cb
+   */
+  onScaleChange(cb: EventCallback<OnScaleChangePayload>) {
+    this.listen('tauri://scale-change', cb)
+  }
+
+  /**
+   * listen to window manager menu event, callback menu id.
+   * @param cb
+   */
+  onMenu(cb: EventCallback<string>) {
+    this.listen('tauri://menu', cb)
   }
 
   /**

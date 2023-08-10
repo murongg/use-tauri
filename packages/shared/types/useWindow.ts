@@ -1,4 +1,5 @@
 import type { Event } from '@tauri-apps/api/event'
+import type { EventCallbackNone, OnMovePayload, OnResizePayload, OnWindowCreatedPayload } from '@use-tauri/core'
 
 export interface UseWindowListenOptions {
 
@@ -7,41 +8,41 @@ export interface UseWindowListenOptions {
    * @param event
    * @returns
    */
-  onMove?: (event: Event<{ x: number; y: number }>) => void
+  onMove?: (event: Event<OnMovePayload>) => void
   /**
    * Listen to window resize event.
    * @param event
    * @returns
    */
-  onResize?: (event: Event<{ width: number; height: number }>) => void
+  onResize?: (event: Event<OnResizePayload>) => void
 
   /**
    * Listen to window focus event.
    * @param event
    * @returns
    */
-  onBlur?: (event: Event<null>) => void
+  onBlur?: (event: Event<EventCallbackNone>) => void
 
   /**
    * Listen to window blur event.
    * @param event
    * @returns
    */
-  onFocus?: (event: Event<null>) => void
+  onFocus?: (event: Event<EventCallbackNone>) => void
 
   /**
    * Listen to window created event.
    * @param event
    * @returns
    */
-  onWindowCreated?: (event: Event<null>) => void
+  onWindowCreated?: (event: Event<OnWindowCreatedPayload>) => void
 
   /**
    * Listen to window close event.
    * @param event
    * @returns
    */
-  onCloseRequested?: (event: Event<null>) => void
+  onCloseRequested?: (event: Event<EventCallbackNone>) => void
 
   /**
    * Enable listens.
