@@ -19,9 +19,35 @@
       "@use-tauri/core": [
         "./packages/core/index.ts"
       ],
+      "@use-tauri/core/*": [
+        "./packages/core/*"
+      ],
       "@use-tauri/shared": [
         "./packages/shared/index.ts"
+      ],
+      "@use-tauri/shared/*": [
+        "./packages/shared/*"
+      ],
+      "@use-tauri/vue": [
+        "./packages/vue/index.ts"
+      ],
+      "@use-tauri/vue/*": [
+        "./packages/vue/*"
+      ],
+      "@use-tauri/react": [
+        "./packages/react/index.ts"
+      ],
+      "@use-tauri/react/*": [
+        "./packages/react/*"
       ]
     }
-  }
+  },
+  "include": [
+    "packages"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.md",
+    "**/dist"
+  ]
 }
