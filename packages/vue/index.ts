@@ -1,1 +1,1 @@
-export { useWindow } from './composables/useWindow'
+export * from './composables'
