@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { type UseWindowListenOptions, getWindowManagerAndOptions, useWindowShared } from '@use-tauri/shared'
 import type { WindowManager, WindowOptions } from '@tauri-apps/api/window'
 
-export interface UseWindowReturn {
+export type UseWindowReturn = [WindowManager, {
   x: number
   y: number
   width: number
@@ -12,7 +12,7 @@ export interface UseWindowReturn {
   isCreated: boolean
   isClosed: boolean
   unlistenAll: () => void
-}
+}]
 export function useWindow(window: WindowManager, options?: UseWindowListenOptions): UseWindowReturn
 export function useWindow(label: string, windowOptions?: WindowOptions, options?: UseWindowListenOptions): UseWindowReturn
 export function useWindow(...args: any[]): UseWindowReturn {
@@ -67,7 +67,7 @@ export function useWindow(...args: any[]): UseWindowReturn {
     }
   }, [])
 
-  return {
+  return [windowManager, {
     x,
     y,
     width,
@@ -77,5 +77,5 @@ export function useWindow(...args: any[]): UseWindowReturn {
     isClosed,
     isCreated,
     unlistenAll,
-  }
+  }]
 }
