@@ -1,4 +1,5 @@
-import { WebviewWindow, WindowManager } from '@tauri-apps/api/window'
+import { WindowManager } from '@tauri-apps/api/window'
+import { getOrNewManager } from '@use-tauri/core'
 import type { UseWindowListenOptions } from '../types'
 
 export function getWindowManagerAndOptions(...args: any[]) {
@@ -9,7 +10,7 @@ export function getWindowManagerAndOptions(...args: any[]) {
     options = args[1]
   }
   else {
-    windowManager = new WebviewWindow(args[0], args[1])
+    windowManager = getOrNewManager(args[0], args[1])
     options = args[2]
   }
   return {

@@ -1,5 +1,5 @@
 import type { EventCallback, EventName, UnlistenFn } from '@tauri-apps/api/event'
-import type { Theme, WindowManager } from '@tauri-apps/api/window'
+import { type Theme, WebviewWindow, type WindowManager, type WindowOptions } from '@tauri-apps/api/window'
 import type { EventCallbackNone, FilePath, OnMovePayload, OnResizePayload, OnScaleChangePayload, OnWindowCreatedPayload } from './types'
 
 const managers: Map<string, WindowManager> = new Map()
@@ -159,4 +159,13 @@ export class UseTauriWindowManager {
     this.listenings.forEach(unlisten => unlisten())
     this.listenings.clear()
   }
+}
+
+export function getOrNewManager(label: string, options?: WindowOptions) {
+  if (managers.get(label))
+    return managers.get(label)!
+
+  const manager = new WebviewWindow(label, options)
+  managers.set(label, manager)
+  return manager
 }
