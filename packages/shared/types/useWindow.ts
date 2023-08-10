@@ -1,5 +1,6 @@
 import type { Event } from '@tauri-apps/api/event'
 import type { EventCallbackNone, OnMovePayload, OnResizePayload, OnWindowCreatedPayload } from '@use-tauri/core'
+import type { Theme } from '@tauri-apps/api/window'
 
 export interface UseWindowListenOptions {
 
@@ -45,6 +46,13 @@ export interface UseWindowListenOptions {
   onCloseRequested?: (event: Event<EventCallbackNone>) => void
 
   /**
+   * Listen to window theme changed event.
+   * @param event
+   * @returns
+   */
+  onThemeChanged?: (event: Event<Theme>) => void
+
+  /**
    * Enable listens.
    */
   enableListens?: {
@@ -83,5 +91,11 @@ export interface UseWindowListenOptions {
      * When value is true, isClosed will be updated when window close.
      */
     closeRequested?: boolean
+
+    /**
+     * Enable listen to theme changed event.
+     * When value is true, theme will be updated when window theme changed.
+     */
+    themeChanged?: boolean
   }
 }

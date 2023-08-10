@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { type UseWindowListenOptions, getWindowManagerAndOptions, useWindowShared } from '@use-tauri/shared'
-import type { WindowManager, WindowOptions } from '@tauri-apps/api/window'
+import type { Theme, WindowManager, WindowOptions } from '@tauri-apps/api/window'
 
 export type UseWindowReturn = Readonly<[WindowManager, {
   x: number
@@ -11,13 +11,14 @@ export type UseWindowReturn = Readonly<[WindowManager, {
   isFocus: boolean
   isCreated: boolean
   isClosed: boolean
+  theme: Theme
   unlistenAll: () => void
 }]>
 export function useWindow(window: WindowManager, options?: UseWindowListenOptions): UseWindowReturn
 export function useWindow(label: string, windowOptions?: WindowOptions, options?: UseWindowListenOptions): UseWindowReturn
 export function useWindow(...args: any[]): UseWindowReturn {
   const { windowManager, options } = getWindowManagerAndOptions(...args)
-  const { enableListens = {}, onMove, onResize, onBlur, onFocus, onWindowCreated, onCloseRequested } = options
+  const { enableListens = {}, onMove, onResize, onBlur, onFocus, onWindowCreated, onCloseRequested, onThemeChanged } = options
 
   const [x, setX] = useState(0)
   const [y, setY] = useState(0)
@@ -28,6 +29,8 @@ export function useWindow(...args: any[]): UseWindowReturn {
   const [isFocus, setIsFocus] = useState(false)
   const [isCreated, setIsCreated] = useState(false)
   const [isClosed, setIsClosed] = useState(false)
+
+  const [theme, setTheme] = useState<Theme>('light')
 
   const { unlistenAll } = useWindowShared(windowManager, {
     enableListens,
@@ -59,6 +62,10 @@ export function useWindow(...args: any[]): UseWindowReturn {
       setIsClosed(true)
       onCloseRequested?.(event)
     },
+    onThemeChanged(event) {
+      setTheme(event.payload)
+      onThemeChanged?.(event)
+    },
   })
 
   useEffect(() => {
@@ -76,6 +83,7 @@ export function useWindow(...args: any[]): UseWindowReturn {
     isFocus,
     isClosed,
     isCreated,
+    theme,
     unlistenAll,
   }] as const
 }

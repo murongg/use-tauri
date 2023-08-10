@@ -6,8 +6,6 @@ export interface WindowSize {
   width: number
   height: number
 }
-export type WindowTheme = 'Dark' | 'Light'
-
 export type FilePath = string
 
 export type OnMovePayload = WindowPosition

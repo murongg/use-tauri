@@ -1,6 +1,6 @@
 import type { EventCallback, EventName, UnlistenFn } from '@tauri-apps/api/event'
-import type { WindowManager } from '@tauri-apps/api/window'
-import type { EventCallbackNone, FilePath, OnMovePayload, OnResizePayload, OnScaleChangePayload, OnWindowCreatedPayload, WindowTheme } from './types'
+import type { Theme, WindowManager } from '@tauri-apps/api/window'
+import type { EventCallbackNone, FilePath, OnMovePayload, OnResizePayload, OnScaleChangePayload, OnWindowCreatedPayload } from './types'
 
 const managers: Map<string, WindowManager> = new Map()
 
@@ -115,7 +115,7 @@ export class UseTauriWindowManager {
    * listen to window theme changed event, callback theme.
    * @param cb
    */
-  onThemeChanged(cb: EventCallback<WindowTheme>) {
+  onThemeChanged(cb: EventCallback<Theme>) {
     this.listen('tauri://theme-changed', cb)
   }
 

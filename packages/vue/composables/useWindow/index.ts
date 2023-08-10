@@ -1,6 +1,6 @@
 import { getWindowManagerAndOptions, useWindowShared } from '@use-tauri/shared'
 import type { UseWindowListenOptions } from '@use-tauri/shared'
-import type { WindowManager, WindowOptions } from '@tauri-apps/api/window'
+import type { Theme, WindowManager, WindowOptions } from '@tauri-apps/api/window'
 import { type Ref, ref } from 'vue-demi'
 import { tryOnUnmounted } from '@vueuse/core'
 
@@ -14,6 +14,7 @@ export interface UseWindowReturn {
   isFocus: Ref<boolean>
   isCreated: Ref<boolean>
   isClosed: Ref<boolean>
+  theme: Ref<Theme>
   unlistenAll: () => void
 }
 
@@ -32,7 +33,9 @@ export function useWindow(...args: any[]): UseWindowReturn {
   const isCreated = ref(false)
   const isClosed = ref(false)
 
-  const { enableListens = {}, onMove, onResize, onBlur, onFocus, onWindowCreated, onCloseRequested } = options
+  const theme = ref<Theme>('light')
+
+  const { enableListens = {}, onMove, onResize, onBlur, onFocus, onWindowCreated, onCloseRequested, onThemeChanged } = options
   const { unlistenAll } = useWindowShared(windowManager, {
     enableListens,
     onMove(event) {
@@ -63,6 +66,10 @@ export function useWindow(...args: any[]): UseWindowReturn {
       isClosed.value = true
       onCloseRequested?.(event)
     },
+    onThemeChanged(event) {
+      theme.value = event.payload
+      onThemeChanged?.(event)
+    },
   })
 
   tryOnUnmounted(() => {
@@ -79,6 +86,7 @@ export function useWindow(...args: any[]): UseWindowReturn {
     isFocus,
     isCreated,
     isClosed,
+    theme,
     unlistenAll,
   }
 }
