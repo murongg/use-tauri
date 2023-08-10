@@ -19,6 +19,7 @@ const external = [
   ...builtinModules,
   'vue',
   'react',
+  '@vueuse/core',
   '@use-tauri/shared',
   '@use-tauri/core',
   '@tauri-apps/api',
