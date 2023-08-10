@@ -29,7 +29,7 @@ async function release() {
   execSync(`git commit -m "chore: release v${version}"`, { stdio: 'inherit' })
   execSync(`git tag -a v${version} -m "v${version}"`, { stdio: 'inherit' })
 
-  execSync('git push"', { stdio: 'inherit' })
+  execSync('git push', { stdio: 'inherit' })
   execSync('git push --tags"', { stdio: 'inherit' })
 }
 
