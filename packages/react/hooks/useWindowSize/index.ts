@@ -1,4 +1,5 @@
 import type { WindowManager } from '@tauri-apps/api/window'
+import { useEffect } from 'react'
 import { useWindow } from '../useWindow'
 
 export interface UseWindowSizeReturn {
@@ -7,11 +8,17 @@ export interface UseWindowSizeReturn {
 }
 
 export function useWindowSize(manager: WindowManager): UseWindowSizeReturn {
-  const [, { width, height }] = useWindow(manager, {
+  const [, { width, height, unlisten }] = useWindow(manager, {
     enableListens: {
       resize: true,
     },
   })
+
+  useEffect(() => {
+    return () => {
+      unlisten('tauri://resize')
+    }
+  }, [])
 
   return {
     width,

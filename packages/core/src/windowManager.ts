@@ -150,6 +150,7 @@ export class UseTauriWindowManager {
    */
   unlisten(name: EventName) {
     this.getListen(name)?.()
+    this.listenings.delete(name)
   }
 
   /**

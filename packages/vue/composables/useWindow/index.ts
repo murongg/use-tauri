@@ -3,6 +3,7 @@ import type { UseWindowListenOptions } from '@use-tauri/shared'
 import type { Theme, WindowManager, WindowOptions } from '@tauri-apps/api/window'
 import { type Ref, ref } from 'vue-demi'
 import { tryOnUnmounted } from '@vueuse/core'
+import type { UseTauriWindowManager } from '@use-tauri/core'
 
 export interface UseWindowReturn {
   windowManager: WindowManager
@@ -16,6 +17,7 @@ export interface UseWindowReturn {
   isClosed: Ref<boolean>
   theme: Ref<Theme>
   unlistenAll: () => void
+  unlisten: UseTauriWindowManager['unlisten']
 }
 
 export function useWindow(window: WindowManager, options?: UseWindowListenOptions): UseWindowReturn
@@ -36,7 +38,7 @@ export function useWindow(...args: any[]): UseWindowReturn {
   const theme = ref<Theme>('light')
 
   const { enableListens = {}, onMove, onResize, onBlur, onFocus, onWindowCreated, onCloseRequested, onThemeChanged } = options
-  const { unlistenAll } = useWindowShared(windowManager, {
+  const { unlistenAll, unlisten } = useWindowShared(windowManager, {
     enableListens,
     onMove(event) {
       x.value = event.payload.x
@@ -88,5 +90,6 @@ export function useWindow(...args: any[]): UseWindowReturn {
     isClosed,
     theme,
     unlistenAll,
+    unlisten,
   }
 }

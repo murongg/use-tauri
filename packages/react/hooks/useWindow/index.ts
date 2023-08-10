@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { type UseWindowListenOptions, getWindowManagerAndOptions, useWindowShared } from '@use-tauri/shared'
 import type { Theme, WindowManager, WindowOptions } from '@tauri-apps/api/window'
+import type { UseTauriWindowManager } from '@use-tauri/core'
 
 export type UseWindowReturn = Readonly<[WindowManager, {
   x: number
@@ -13,6 +14,7 @@ export type UseWindowReturn = Readonly<[WindowManager, {
   isClosed: boolean
   theme: Theme
   unlistenAll: () => void
+  unlisten: UseTauriWindowManager['unlisten']
 }]>
 export function useWindow(window: WindowManager, options?: UseWindowListenOptions): UseWindowReturn
 export function useWindow(label: string, windowOptions?: WindowOptions, options?: UseWindowListenOptions): UseWindowReturn
@@ -32,7 +34,7 @@ export function useWindow(...args: any[]): UseWindowReturn {
 
   const [theme, setTheme] = useState<Theme>('light')
 
-  const { unlistenAll } = useWindowShared(windowManager, {
+  const { unlistenAll, unlisten } = useWindowShared(windowManager, {
     enableListens,
     onMove(event) {
       setX(event.payload.x)
@@ -85,5 +87,6 @@ export function useWindow(...args: any[]): UseWindowReturn {
     isCreated,
     theme,
     unlistenAll,
+    unlisten,
   }] as const
 }

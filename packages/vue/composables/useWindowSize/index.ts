@@ -1,5 +1,6 @@
 import type { Ref } from 'vue-demi'
 import type { WindowManager } from '@tauri-apps/api/window'
+import { tryOnUnmounted } from '@vueuse/core'
 import { useWindow } from '../useWindow'
 
 export interface UseWindowSizeReturn {
@@ -8,10 +9,14 @@ export interface UseWindowSizeReturn {
 }
 
 export function useWindowSize(manager: WindowManager): UseWindowSizeReturn {
-  const { width, height } = useWindow(manager, {
+  const { width, height, unlisten } = useWindow(manager, {
     enableListens: {
       resize: true,
     },
+  })
+
+  tryOnUnmounted(() => {
+    unlisten('tauri://resize')
   })
 
   return {

@@ -6,6 +6,7 @@ const fn = (..._args: any[]) => { }
 
 export interface useWindowSharedReturn {
   unlistenAll: () => void
+  unlisten: UseTauriWindowManager['unlisten']
 }
 
 export function useWindowShared(window: WindowManager, options: UseWindowListenOptions): useWindowSharedReturn {
@@ -35,5 +36,6 @@ export function useWindowShared(window: WindowManager, options: UseWindowListenO
 
   return {
     unlistenAll,
+    unlisten: useTauriWindowManager.unlisten,
   }
 }
