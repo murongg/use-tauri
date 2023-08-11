@@ -10,7 +10,7 @@ export interface useWindowSharedReturn {
 }
 
 export function useWindowShared(window: WindowManager, options: UseWindowListenOptions): useWindowSharedReturn {
-  const { enableListens = {}, onMove = fn, onResize = fn, onBlur = fn, onFocus = fn, onWindowCreated = fn, onCloseRequested = fn } = options
+  const { enableListens = {}, onMove = fn, onResize = fn, onBlur = fn, onFocus = fn, onWindowCreated = fn, onCloseRequested = fn, onThemeChanged = fn } = options
   const useTauriWindowManager = new UseTauriWindowManager(window)
   if (enableListens?.move || onMove)
     useTauriWindowManager.onMove(onMove)
@@ -29,6 +29,9 @@ export function useWindowShared(window: WindowManager, options: UseWindowListenO
 
   if (enableListens?.closeRequested || onCloseRequested)
     useTauriWindowManager.onCloseRequested(onCloseRequested)
+
+  if (enableListens?.themeChanged || onThemeChanged)
+    useTauriWindowManager.onThemeChanged(onThemeChanged)
 
   const unlistenAll = () => {
     useTauriWindowManager.unlistenAll()
