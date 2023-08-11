@@ -2,36 +2,29 @@ import type { WindowManager } from '@tauri-apps/api/window'
 import { UseTauriWindowManager } from '@use-tauri/core'
 import type { UseWindowListenOptions } from '../types'
 
-const fn = (..._args: any[]) => { }
+// const fn = (..._args: any[]) => { }
 
 export interface useWindowSharedReturn {
   unlistenAll: () => void
   unlisten: UseTauriWindowManager['unlisten']
 }
 
+function tryOnManagerEvent(enable: boolean | undefined, on: Function | undefined, targetOn: Function) {
+  if (enable || on)
+    targetOn(on)
+}
+
 export function useWindowShared(window: WindowManager, options: UseWindowListenOptions): useWindowSharedReturn {
-  const { enableListens = {}, onMove = fn, onResize = fn, onBlur = fn, onFocus = fn, onWindowCreated = fn, onCloseRequested = fn, onThemeChanged = fn } = options
+  const { enableListens = {}, onMove, onResize, onBlur, onFocus, onWindowCreated, onCloseRequested, onThemeChanged } = options
   const useTauriWindowManager = new UseTauriWindowManager(window)
-  if (enableListens?.move || onMove)
-    useTauriWindowManager.onMove(onMove)
 
-  if (enableListens?.resize || onResize)
-    useTauriWindowManager.onResize(onResize)
-
-  if (enableListens.blur || enableListens.focus || onBlur)
-    useTauriWindowManager.onBlur(onBlur)
-
-  if (enableListens.blur || enableListens.focus || onFocus)
-    useTauriWindowManager.onFocus(onFocus)
-
-  if (enableListens?.windowCreated || onWindowCreated)
-    useTauriWindowManager.onWindowCreated(onWindowCreated)
-
-  if (enableListens?.closeRequested || onCloseRequested)
-    useTauriWindowManager.onCloseRequested(onCloseRequested)
-
-  if (enableListens?.themeChanged || onThemeChanged)
-    useTauriWindowManager.onThemeChanged(onThemeChanged)
+  tryOnManagerEvent(enableListens?.move, onMove, useTauriWindowManager.onMove)
+  tryOnManagerEvent(enableListens?.resize, onResize, useTauriWindowManager.onResize)
+  tryOnManagerEvent(enableListens?.blur || enableListens?.focus, onBlur, useTauriWindowManager.onBlur)
+  tryOnManagerEvent(enableListens?.blur || enableListens?.focus, onFocus, useTauriWindowManager.onFocus)
+  tryOnManagerEvent(enableListens?.windowCreated, onWindowCreated, useTauriWindowManager.onWindowCreated)
+  tryOnManagerEvent(enableListens?.closeRequested, onCloseRequested, useTauriWindowManager.onCloseRequested)
+  tryOnManagerEvent(enableListens?.themeChanged, onThemeChanged, useTauriWindowManager.onThemeChanged)
 
   const unlistenAll = () => {
     useTauriWindowManager.unlistenAll()
